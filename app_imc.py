@@ -1,15 +1,19 @@
 import streamlit as st
 
-st.title('Calculadora de IMC e situação de saúde do Bruto')
+st.title('Calculadora de IMC e Situação de Saúde')
+st.subheader('by J. Brutus')
 st.write('Está calculadora utiliza aprendizado de máquina com dados de 50.000 pessoas saudáveis e doente. Com base em inteligencia artificial, '
          'o aplicativo calcula utilizando idade e sexo seu IMC e probabilidade de ter algumas doenças')
 nome = st.text_input('Digite o seu nome completo (pressione ENTER após digitar)')
 if nome.strip() < '2':
     st.error('Por favor, digite o nome e o sobrenome.')
-idade = st.number_input('Idade',format='%d', step=1)
-sexo = st.radio('Digite o seu sexo de nascimento (despreze orientações sexuais por enquanto)', ('Masculino', 'Feminino'))
+idade = st.number_input('Digite sua idade',format='%d', step=1)
+sexo = st.radio('Digite o seu sexo de nascimento',
+                ('Masculino', 'Feminino'), help="Masculino = tem pipi, Feminino = tem pepeka. (para está análise é desnecessário informar orientações sexuais neste caso, por favor)")
 if sexo == 'Feminino':
-    gravida = st.radio('Grávida', ('Sim', 'Não'))
+    gravida = st.radio(f'Voce está grávida, {nome.title()}', ('Sim', 'Não'))
+    if gravida == 'Sim':
+        st.slider('Selecione quantas semanas de gestação', 0, 39, 4)
 peso = st.number_input('Digite o seu peso em (Kg)')
 status = st.radio('Selecione a medida da altura', ('metros', 'centímetros'))
 if status == 'metros':

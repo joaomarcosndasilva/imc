@@ -1,2 +1,4 @@
 
 Nome: Jéssica Souza - Sexo: Feminino - 30 - Peso: 62.0Kg - Altura: 1.63m - IMC: 23.335466144755166
+Nome: Jéssica Souza - Sexo: Feminino - 30 - Peso: 67.0Kg - Altura: 1.63m - IMC: 25.21735857578381
+Nome: João Marcos - Sexo: Masculino - 38 - Peso: 90.05Kg - Altura: 1.73m - IMC: 30.087874636640045
