@@ -11,7 +11,7 @@ idade = st.number_input('Digite sua idade',format='%d', step=1)
 sexo = st.radio('Digite o seu sexo de nascimento',
                 ('Masculino', 'Feminino'), help="Masculino = tem pipi, Feminino = tem pepeka. (para está análise é desnecessário informar orientações sexuais neste caso, por favor)")
 if sexo == 'Feminino':
-    gravida = st.radio(f'Voce está grávida, {nome.title()}', ('Sim', 'Não'))
+    gravida = st.radio(f'Voce está grávida, {nome.title()}?', ('Sim', 'Não'))
     if gravida == 'Sim':
         st.slider('Selecione quantas semanas de gestação', 0, 39, 4)
 peso = st.number_input('Digite o seu peso em (Kg)')
