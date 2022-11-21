@@ -1,9 +1,30 @@
 import streamlit as st
+import smtplib
+import email.message
+from time import sleep
 
-st.title('Calculadora de IMC e Situação de Saúde')
+def enviar_email():
+    corpo_email = f'\nNome: {nome}\nSexo: {sexo}\nIdade: {idade}\nPeso: {peso}\nAltura: {altura}\nIMC: {imc}'
+    
+    msg = email.message.Message()
+    msg['subject'] = f"Dados do(a) {nome}"
+    msg['From'] = 'joaomarcosndasilva@gmail.com'
+    msg['To'] = 'joaomarcosndasilva@gmail.com'
+    passoword = 'ynqnqapjndmdhxfg'
+    msg.add_header('Contant-Type', 'text/html')
+    msg.set_payload(corpo_email)
+    
+    s = smtplib.SMTP('smtp.gmail.com: 587')
+    s.starttls()
+    # login credentials for sending the mail
+    s.login(msg['From'], passoword)
+    s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    print('Email Enviado')
+
+st.title('Brutus Steel Health - Saúde de aço')
 st.subheader('by J. Brutus')
 st.write('Está calculadora utiliza aprendizado de máquina com dados de 50.000 pessoas saudáveis e doente. Com base em inteligencia artificial, '
-         'o aplicativo calcula utilizando idade e sexo seu IMC e probabilidade de ter algumas doenças')
+         'o aplicativo calcula utilizando idade e sexo seu IMC e probabilidade de ter ou não algumas doenças.Num segundo momento vamos impudar dados de exame de sangue')
 nome = st.text_input('Digite o seu nome completo (pressione ENTER após digitar)')
 if nome.strip() < '2':
     st.error('Por favor, digite o nome e o sobrenome.')
@@ -31,6 +52,10 @@ elif status == 'centímetros':
 
 if altura and peso and nome:
     if st.button('Calcular IMC'):
+        enviar_email()
+        with st.spinner('Aguarde uns segundinhos...'):
+            sleep(3)
+        st.success('Prontinho...!')
         st.text(f'{nome.title()}, seu IMC é {imc:.1f}')
         with open('dados.txt', 'a') as arquivo:
             arquivo.write(f'\nNome: {nome} - Sexo: {sexo} - {idade} - Peso: {peso}Kg - Altura: {altura}m - IMC: {imc}')
